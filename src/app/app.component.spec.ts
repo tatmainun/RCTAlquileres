@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, getTestBed, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { ReservarService } from './servicios/reservar/reservar.service';
 
@@ -10,7 +10,7 @@ class ReservarServiceMock {
 
 describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
-  let component: AppComponent;
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
@@ -19,15 +19,11 @@ describe('AppComponent', () => {
       providers: [
         { provide: ReservarService, useClass: ReservarServiceMock }
       ]
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    component = fixture.componentInstance;
+    }).compileComponents();    
   });
 
   it('should create the app', () => {
-    fixture = TestBed.createComponent(AppComponent);
+    const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
   });
@@ -46,11 +42,15 @@ describe('AppComponent', () => {
   });
 
   fit('se deberia llamar al servicio de reserva al querer reservar', () => {
-    spyOn(component, 'reservarDepto');
-    fixture.detectChanges();
-    expect(component.reservarDepto).toHaveBeenCalled();
+    const fixture = TestBed.createComponent(AppComponent);
+    
+    const servicespy = getTestBed().inject(ReservarService);
+    const a = spyOn(
+      servicespy,
+      'reservarDepartamento'
+    ).and.returnValue(true);
 
-    // const reservarDepartamento = spyOn(ReservarService, 'reservarDepartamento').and.returnValue(true);
-    // expect(reservarDepartamento).toHaveBeenCalled();
+    fixture.detectChanges();
+    expect(a).toHaveBeenCalled();
   })
 });
