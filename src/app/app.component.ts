@@ -1,5 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ReservarService } from './servicios/reservar/reservar.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -8,20 +7,9 @@ import { ReservarService } from './servicios/reservar/reservar.service';
 })
 export class AppComponent implements OnInit{
 
-  @Input()
-  private fechaDesde: String = "";
-
-  @Input()
-  private fechaHasta: String = "";
-
-  constructor(private reservarService: ReservarService){}
+  constructor(){}
 
   ngOnInit(): void {
-    this.reservarDepto();
-  }
-
-  public reservarDepto():void {
-    this.reservarService.reservarDepartamento(this.fechaDesde, this.fechaHasta);
   }
 
   title = 'rctalquileres';
