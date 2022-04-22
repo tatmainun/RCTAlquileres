@@ -14,14 +14,14 @@ describe('ReservarService', () => {
     expect(service).toBeTruthy();
   });
 
-  fit('debería poder reservar el depto', () => {
+  it('debería poder reservar el depto', () => {
     let fechaDesde = '2022-03-29';
     let fechaHasta = '2022-03-30';
     const reserva = service.reservarDepartamento(fechaDesde, fechaHasta);
     expect(reserva).toBeTruthy();
   });
 
-  fit('no deberías poder reservar el depto sin fechas', () => {
+  it('no deberías poder reservar el depto sin fechas', () => {
     let fechaDesde = '';
     let fechaHasta = '';
     const reserva = service.reservarDepartamento(fechaDesde, fechaHasta);
